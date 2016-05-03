@@ -3,8 +3,8 @@
 	"description": "this file contains all configuration params to connect to the database",
 	"params"     : {
 		"protocol": 	"mongodb",
-		"host": 		"ds013202.mlab.com",
-		"port":		"13202",
+		"host": 		"localhost",
+		"port":		"27017",
 		"user": 		"challenge",
 		"password" : 	"challenge",
 		"database": 	"rps_challenge"
