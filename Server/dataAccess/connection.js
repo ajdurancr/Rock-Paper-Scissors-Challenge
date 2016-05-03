@@ -17,10 +17,10 @@ var readJsonFile = function() {
 };
 
 exports.findDocuments = function(params, callback) {
-    var dbUrl = 'mongodb://';
+    var dbUrl = '';
     var dbConfig = readJsonFile();
     // connection URL
-    dbUrl = dbUrl.concat(dbConfig.params.host , ':',  dbConfig.params.port,  '/' , dbConfig.params.database);
+    dbUrl = dbUrl.concat(dbConfig.params.protocol, '://', dbConfig.params.host , ':',  dbConfig.params.port,  '/' , dbConfig.params.database);
     // open database connection
     MongoClient.connect(dbUrl, function(err, db){
         if (err){ //connection error
@@ -67,10 +67,10 @@ exports.findDocuments = function(params, callback) {
 
 
 exports.insertOneDocument = function(params, callback) {
-    var dbUrl = 'mongodb://';
+    var dbUrl = '';
     var dbConfig = readJsonFile();
     // connection URL
-    dbUrl = dbUrl.concat(dbConfig.params.host , ':',  dbConfig.params.port,  '/' , dbConfig.params.database);
+    dbUrl = dbUrl.concat(dbConfig.params.protocol, '://', dbConfig.params.host , ':',  dbConfig.params.port,  '/' , dbConfig.params.database);
 
     // open database connection
     MongoClient.connect(dbUrl, function(err, db){
@@ -109,10 +109,10 @@ exports.insertOneDocument = function(params, callback) {
 };
 
 exports.insertDocuments = function(params, callback) {
-    var dbUrl = 'mongodb://';
+    var dbUrl = '';
     var dbConfig = readJsonFile();
     // connection URL
-    dbUrl = dbUrl.concat(dbConfig.params.host , ':',  dbConfig.params.port,  '/' , dbConfig.params.database);
+    dbUrl = dbUrl.concat(dbConfig.params.protocol, '://', dbConfig.params.host , ':',  dbConfig.params.port,  '/' , dbConfig.params.database);
 
     // open database connection
     MongoClient.connect(dbUrl, function(err, db){
@@ -161,8 +161,7 @@ exports.updateOneDocument = function(params, callback) {
     var dbUrl = '';
     var dbConfig = readJsonFile();
     // connection URL
-    //dbUrl = dbUrl.concat(dbConfig.params.host , ':',  dbConfig.params.port,  '/' , dbConfig.params.database);
-    dbUrl = dbUrl.concat(dbConfig.params.protocol, '://', dbConfig.user, ':', dbConfig.password, '@', dbConfig.params.host , ':',  dbConfig.params.port,  '/' , dbConfig.params.database);
+    dbUrl = dbUrl.concat(dbConfig.params.protocol, '://', dbConfig.params.host , ':',  dbConfig.params.port,  '/' , dbConfig.params.database);
 
     // open database connection
     MongoClient.connect(dbUrl, function(err, db){
@@ -201,10 +200,10 @@ exports.updateOneDocument = function(params, callback) {
 };
 
 exports.deleteOneDocument = function(params, callback) {
-    var dbUrl = 'mongodb://';
+    var dbUrl = '';
     var dbConfig = readJsonFile();
     // connection URL
-    dbUrl = dbUrl.concat(dbConfig.params.host , ':',  dbConfig.params.port,  '/' , dbConfig.params.database);
+    dbUrl = dbUrl.concat(dbConfig.params.protocol, '://', dbConfig.params.host , ':',  dbConfig.params.port,  '/' , dbConfig.params.database);
 
     // open database connection
     MongoClient.connect(dbUrl, function(err, db){
@@ -243,10 +242,10 @@ exports.deleteOneDocument = function(params, callback) {
 };
 
 exports.deleteDocuments = function(params, callback) {
-    var dbUrl = 'mongodb://';
+    var dbUrl = '';
     var dbConfig = readJsonFile();
     // connection URL
-    dbUrl = dbUrl.concat(dbConfig.params.host , ':',  dbConfig.params.port,  '/' , dbConfig.params.database);
+    dbUrl = dbUrl.concat(dbConfig.params.protocol, '://', dbConfig.params.host , ':',  dbConfig.params.port,  '/' , dbConfig.params.database);
 
     // open database connection
     MongoClient.connect(dbUrl, function(err, db){
