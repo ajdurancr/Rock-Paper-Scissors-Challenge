@@ -2,18 +2,44 @@ var championshipRepo = require('../dataAccess/championshipRepo');
 
 var sortTop = function(a, b){return b.points - a.points};
 
-exports.saveNewRecord = function (players, callback) {
-	//callback(res);
-	championshipRepo.updateUserPoints({userId: players.first, points: 3}, function (res) {
+var matchSolver = function (player1, player2) {
+	if (	(player1[1]  == player2[1]) || 
+		(player1[1] == 'P' && player2[1] == 'R') || 
+		(player1[1] == 'R' && player2[1] == 'S') || 
+		(player1[1] == 'S' && player2[1] == 'P')
+	    ) {
+		return player1;
+	} else{
+		return player2;
+	}
+}
+
+var tournamentSolver = function (match) {
+	if (Array.isArray(match[0])) {
+		return matchSolver( tournamentSolver(match[0]), tournamentSolver(match[1]));
+	} else {
+		return match;
+	}
+}
+
+exports.addNewRecord = function (players, callback) {
+	var data = {userId: players.first, points: 3};
+	championshipRepo.updateUserPoints(data, function (res) {
 		if(res.success){
-			callback({status: 'success'});
+			data = {userId: players.second, points: 1};
+			championshipRepo.updateUserPoints(data, function (res) {
+				if(res.success){
+					callback({status: 'success'});
+				}else{
+					callback({status: 'failure'});
+				}
+			});
 		}else{
 			callback({status: 'failure'});
 		}
 	});
 }
-//data.topN: number of records needed
-//exports.getTopN = function (data, callback) {
+
 exports.getTop = function (count, callback) {
 	if (count <= 0) {
 		callback({players: []});
@@ -23,8 +49,6 @@ exports.getTop = function (count, callback) {
 		if (res.success) {
 			var records = res.data;
 			if (records.length == 0) {
-				console.log('console.log({players: []}): no records found!');
-				console.log({players: []});
 				callback({players: []})
 				return;
 			}else{
@@ -32,22 +56,19 @@ exports.getTop = function (count, callback) {
 				if (records.length > count) {
 					records.splice(count - 1, records.length - count);
 				}
-				console.log('console.log({players: records});');
-				console.log({players: records});
 				callback({players: records})
 				return;
 			}
 		} else {
-			console.log('console.log({players: []}): failed to get users information');
-			console.log({players: []});
 			callback({players: []});
 			return;
 		}
 	});
-	
 }
 
-exports.solveChampionship = function (record, callback) {
-	//callback(res);
-	callback({success: true})
+exports.newChampionship = function (tournament, callback) {
+	var winner = tournamentSolver(tournament);
+	callback({winner: winner})
 }
+
+
