@@ -2,7 +2,8 @@ var React = require('react'),
       ReactDOM = require('react-dom'),
       Choice= require('./Choice'),
       Play_message= require('./Play_message'),
-      Play_players= require('./Play_players');
+      Play_players= require('./Play_players'),
+      httpRequest = require('../services/httpConnection');
 
 var players = {
 		first: ["Player1", ""],
@@ -30,11 +31,29 @@ var Play = React.createClass({
 	},
 
 	solveMatch: function () {
-		var username = 'defaultWinnerUser';
-		var tittle = 'Winner';
-		var message = 'Congrats '.concat(username,' you have won!.');
-		var button_label = 'New game';
-		this.showMessage(tittle, message, button_label, this.getPlayersInfo);
+		var self = this;
+		httpRequest.makeRequest({
+					  method: 'post',
+					  url: '/api/championship/new',
+					  data: [players.first, players.second]
+					},
+					function (data) {
+						var username = data.winner[0],
+						tittle = 'Winner',
+						choice;
+						if (data.winner[1] == 'P'){
+							choice = 'Paper';
+						}else if (data.winner[1] == 'S'){
+							choice = 'Scissors';
+						}else{
+							choice = 'Rock';
+						}
+
+						var message = 'Congrats '.concat(username,' you have won since you use ', choice ,'!.'),
+						button_label = 'New game';
+						self.showMessage(tittle, message, button_label, self.getPlayersInfo);
+					});
+		
 	},
 
 	showAdvise: function () {

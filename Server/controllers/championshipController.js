@@ -7,6 +7,8 @@ exports.newRecord = function(cRequest, cResponse) {
 };
 
 exports.getTop = function(cRequest, cResponse) {
+	console.log('console.log(cRequest.params);');
+	console.log(cRequest.params);
   campionshipService.getTop(cRequest.params.count, function(res){
         cResponse.send(res);
     });
