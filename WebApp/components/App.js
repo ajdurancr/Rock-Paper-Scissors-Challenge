@@ -7,12 +7,7 @@ var ReactDOM = require('react-dom');
 
 var App = React.createClass({
 	getInitialState: function(){
-		return {
-			players:{
-					first: ["Player1", ""],
-					second: ["Player2", ""]
-				}
-			}
+		return {}
 	},
 	/*loadComponent(component, mountNodeId){
 		ReactDOM.render(component,
