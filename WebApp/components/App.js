@@ -1,40 +1,62 @@
-var React = require('react');
-var Navbar = require('./Navbar');
-var Play = require('./Play');
-var Footer = require('./Footer');
-var ReactDOM = require('react-dom');
+var React = require('react'),
+      Navbar = require('./Navbar'),
+      Play = require('./Play'),
+      Tournament = require('./Tournament'),
+      Top = require('./Top'),
+      Footer = require('./Footer'),
+      ReactDOM = require('react-dom');
 
 
 var App = React.createClass({
 	getInitialState: function(){
 		return {}
 	},
-	/*loadComponent(component, mountNodeId){
-		ReactDOM.render(component,
-		  document.getElementById(mountNodeId)
-		);
-	},
-	componentWillMount(){
-		 this.loadComponent(<Choice username={this.state.firstPlayer[0]}/>, 'componentToLoad');
-	}*/
+
 	componentDidMount: function(){
-		ReactDOM.render(<Play players={this.state.players} />,
+		ReactDOM.render(<Play />,
 				  document.getElementById('pageContent')
 				);
 
 	},
+
+	onPlay: function () {
+		ReactDOM.render(<Play />,
+				  document.getElementById('pageContent')
+				);
+	},
+
+	onTournament: function () {
+		ReactDOM.render(<Tournament />,
+				  document.getElementById('pageContent')
+				);
+	},
+	
+	onTop: function () {
+		ReactDOM.render(<Top />,
+				  document.getElementById('pageContent')
+				);
+	},
+	/*
+	onAbout: function () {
+		ReactDOM.render(<About />,
+				  document.getElementById('pageContent')
+				);
+	},*/
+
 	render: function(){
+		var self = this;
 		var logo = {text: "Rock-Paper-Scissors", link: "#"},
-		       leftMenuItems =  [{text: "Play", link: "#"}, 
-		       			{text: "Tournament", link: "#"},
-		       		      	{text: "Instructions", link: "#"}, 
-		       		      	{text: "About", link: "#"}];
+		       leftMenuItems =  [{text: "Play", link: "#", onClick: self.onPlay}, 
+		       			{text: "Tournament", link: "#", onClick: self.onTournament},
+		       		      	{text: "Top", link: "#", onClick: this.onTop}/*, 
+		       		      	{text: "About", link: "#", onClick: this.onAbout}*/
+		       		      	];
 
 
 		return (
 			<div>
 				<Navbar  logo = {logo} leftMenuItems= {leftMenuItems}/>
-				<div id="pageContent" ></div>
+				<div id="pageContent" >Loading component...</div>
 				
 				<Footer />
 			</div>

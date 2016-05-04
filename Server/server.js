@@ -31,7 +31,7 @@ app.use(function (req, res, next) {
 app.post('/api/championship/result', championshipController.newRecord);
 
 //Retrieves the top players of all championships.
-app.get('/api/championship/top', championshipController.getTop);
+app.get('/api/championship/top/:count', championshipController.getTop);
 
 //Stores the first and second place of a tournament
 app.post('/api/championship/new', championshipController.newChampionship);

@@ -3,10 +3,10 @@ var championshipRepo = require('../dataAccess/championshipRepo');
 var sortTop = function(a, b){return b.points - a.points};
 
 var matchSolver = function (player1, player2) {
-	if (	(player1[1].toLowerCase()  == player2[1].toLowerCase()) || 
-		(player1[1].toLowerCase() == 'p' && player2[1].toLowerCase() == 'r') || 
-		(player1[1] .toLowerCase()== 'r' && player2[1].toLowerCase() == 's') || 
-		(player1[1].toLowerCase() == 's' && player2[1].toLowerCase() == 'p')
+	if (	(player1[1]  == player2[1]) || 
+		(player1[1] == 'P' && player2[1] == 'R') || 
+		(player1[1] == 'R' && player2[1] == 'S') || 
+		(player1[1] == 'S' && player2[1] == 'P')
 	    ) {
 		return player1;
 	} else{
@@ -56,11 +56,7 @@ exports.getTop = function (count, callback) {
 				if (records.length > count) {
 					records.splice(count - 1, records.length - count);
 				}
-				var players = [];
-				for (var i = 0; i < records.length; i++) {
-					players.push(records[i]._id);
-				}
-				callback({players: players})
+				callback({players: records})
 				return;
 			}
 		} else {

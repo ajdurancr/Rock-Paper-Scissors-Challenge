@@ -12,6 +12,7 @@
   "license": "",
   "dependencies": {
     "axios": "^0.11.0",
+    "json-parser": "^1.1.5",
     "react": "^0.14.8",
     "react-dom": "^15.0.2"
   },

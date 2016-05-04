@@ -7,7 +7,11 @@ var Play_players = React.createClass({
   handleClick: function () {
     var p1_name = document.getElementById('player1_name').value;
     var p2_name = document.getElementById('player2_name').value;
-    if (p1_name.length > 0 && p1_name.length > 0) {
+    if (p1_name.length > 0 && p2_name.length > 0) {
+        if (p1_name == p2_name) {
+            alert("Players' names must be different");
+            return;
+        }
         this.props.onClick(p1_name, p2_name);
     } else {
         alert("Players' name can't be empty");
