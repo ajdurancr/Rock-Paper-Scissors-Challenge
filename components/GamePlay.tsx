@@ -11,7 +11,7 @@ const GamePlay = () => (
     {/* <h2 className='text-2xl'>Choose 1 option:</h2> */}
     {/* <div className=''> */}
       {options.map((option) => (
-        <Link key={option} className='p-4' href={`/play/${option}`}>
+        <Link key={option} className='p-4' href={`/play/${option}`} prefetch={false}>
           <Choice choice={option} />
         </Link>
       ))}
